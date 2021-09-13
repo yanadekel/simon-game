@@ -1,7 +1,7 @@
 import "./App.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Game from "./pages/GamePage/Game";
-import HomePage from "./pages/HomePage/HomePage";
+// import HomePage from "./pages/HomePage/HomePage";
 import Header from "./components/Header/Header";
 
 const App = () => {
