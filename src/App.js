@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Game from "./pages/GamePage/Game";
 import HomePage from "./pages/HomePage/HomePage";
@@ -13,10 +13,10 @@ const App = () => {
         </div>
         <div className="appBody">
           <Switch>
-            <Route exact path="/">
+            {/* <Route path="/">
               <HomePage />
-            </Route>
-            <Route path="/game">
+            </Route> */}
+            <Route exact path="/game">
               <Game />
             </Route>
           </Switch>

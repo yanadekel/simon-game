@@ -1,0 +1,21 @@
+.colorCard-wrapper {
+  width: 600px;
+  border-radius: 50%;
+  border: rgba(0, 0, 0, 0.99)30px solid;
+  overflow: hidden;
+  box-shadow: 3px 3px 5px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+
+  .upper-colors {
+    display: flex;
+  }
+  .bottom-colors {
+    display: flex;
+  }
+  .btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,14 @@
+.gameButton {
+    border-radius:50%;
+    background-color:rgba(0, 0, 0, 0.95);
+    font-size:20px;
+    position:absolute;
+    width:200px;
+    height:200px;
+    margin: 0 auto;
+    box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.5);
+    .text{
+        font-size:20px;
+        color:#fff;
+    }
+}
