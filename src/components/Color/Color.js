@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Color.scss';
 
-function color({color, light, onClick}) {
+function color({color, light, onClick, disabled}) {
     return (
         <button
-        className={`color-wrapper ${color} ${light ? "light" : ""}`}
-        onClick={onClick}>
+        className={`color-wrapper ${color} ${light ? light : ""}`}
+        onClick={onClick}
+        disabled={disabled}>
         </button>
     )
 }

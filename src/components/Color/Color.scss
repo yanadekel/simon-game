@@ -2,20 +2,35 @@
     background-color: yellow;
 }
 
+.light-yellow {
+    background: radial-gradient(closest-side, #ebf8e1, yellow);
+}
+
 .blue {
     background-color: blue;
     border-left:20px black solid;
 }
 
+.light-blue {
+    background: radial-gradient(closest-side, #ebf8e1, blue);
+}
 .green {
     background-color: green;
     border-top:20px black solid; 
+}
+
+.light-green {
+    background: radial-gradient(closest-side, #ebf8e1, green);  
 }
 
 .red {
     background-color: red;
     border-top:20px black solid; 
     border-left:20px black solid;
+}
+
+.light-red {
+    background: radial-gradient(closest-side, #ebf8e1, red);
 }
 
 .color-wrapper {
