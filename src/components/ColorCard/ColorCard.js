@@ -6,7 +6,8 @@ import GameContext from "../../Contexts/GameContext";
 import timeout from "../../Utils/Functions";
 
 const ColorCard = () => {
-  const { gameOn, gameOnStates, GameDispatch } = useContext(GameContext);
+  const initialGameState = useContext(GameContext);
+  const { gameOn, gameOnStates, GameDispatch } = initialGameState || {gameOn:false, gameOnStates:{}}
   const {
     colorArr,
     randomColorsArr,
@@ -17,7 +18,16 @@ const ColorCard = () => {
     isGameloopOn,
     isUserTurnOn,
     roundScore
-  } = gameOnStates || {};
+  } = gameOnStates || {
+    rounds: 0,
+    colorArr:["yellow", "blue", "green", "red"],
+    randomColorsArr:[],
+    userArr:[],
+    isGameloopOn:false, 
+    isUserTurnOn:false,
+    btnText:"Simon",
+    roundScore:0
+  };
   const [inGame, setInGame] = useState(gameOn);
   const [lightColor, setLightColor] = useState(``);
   const CopyRandomArr = [...randomColorsArr];
