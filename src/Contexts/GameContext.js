@@ -4,7 +4,6 @@ const GameContext = React.createContext({
     gameOn: false,
     gameOnStates: {
         rounds: 0,
-        light:"",
         colorArr:["yellow", "blue", "green", "red"],
         randomColorsArr:[],
         userArr:[],
