@@ -51,7 +51,6 @@ const ColorCard = () => {
   //second useEffect if computerLoop is on: populate randomColorsArr with a new random color in each loop
 
   useEffect(() => {
-    console.log("computerLoop ", computerLoop);
     if (inGame && computerLoop) {
       let randomColor = colorArr[Math.floor(Math.random() * 4)];
       const randomArr = [...randomColorsArr];
@@ -72,7 +71,6 @@ const ColorCard = () => {
   //third useEffect if randomColorsArr.length turnLight function (turn lights and then populate userArr with lights and then userLoop on and computerLoop off)
 
   useEffect(() => {
-    console.log(randomColorsArr, " randomColorsArr");
     if (inGame && computerLoop && randomColorsArr.length > 0) {
       turnLight();
     }
@@ -81,7 +79,6 @@ const ColorCard = () => {
   //fourth step is userLoop on, user should click on userArr colors, userArr shift first color and compers to user click, true then coputer loop false inGame=fals 
 
   const userTurn = async (e) => {
-    // console.log(userArr, " userArr");
     if (inGame && !computerLoop && userLoop) {
       setLightColor(e.target.value);
 
@@ -134,7 +131,17 @@ const ColorCard = () => {
           payload: {
             gameOnStates: {
               ...gameOnStates,
-              btnText: `TOTAL SCORE: ${roundScore}`,
+              btnText: `GAME OVER`,
+            },
+          },
+        });
+        await timeout(1000);
+        GameDispatch({
+          type: "SET_GAME_ON_STATES",
+          payload: {
+            gameOnStates: {
+              ...gameOnStates,
+              btnText: `TOTAL SCORE ${roundScore}`,
             },
           },
         });
@@ -169,13 +176,14 @@ const ColorCard = () => {
       await timeout(1000);
       setLightColor("");
     }
-
+    await timeout(500);
     GameDispatch({
       type: "SET_GAME_ON_STATES",
       payload: {
         gameOnStates: {
           ...gameOnStates,
           userArr: [...randomColorsArr],
+          btnText: "Your Turn"
         },
       },
     });
@@ -184,7 +192,6 @@ const ColorCard = () => {
     setUserLoop(true);
   };
 
-  //console.log(userArr, " userArr");
 
 
 //function that turn game on: inGame true => triggers first useEffect
