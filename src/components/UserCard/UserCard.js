@@ -9,7 +9,7 @@ import "./UserCard.scss";
 
 const UserCard = () => {
   const { gameOn, gameOnStates, GameDispatch } = useContext(GameContext);
-  const { userName, totalScore, users } = gameOnStates || {
+  const { userName, totalScore, users, rounds, btnText } = gameOnStates || {
     userName: "",
     totalScore: 0,
     users: [],
@@ -40,22 +40,11 @@ const UserCard = () => {
     if (totalScore > 0) {
       setTotal(totalScore);
       localStorage.setItem("usersDate", JSON.stringify(total));
-
-      GameDispatch({
-        type: "SET_GAME_ON_STATES",
-        payload: {
-          gameOnStates: {
-            ...gameOnStates,
-            userName: "",
-            totalScore: 0,
-          },
-        },
-      });
-      setUserImage(randomeImage());
-      setName(false);
-      setTotal(0);
     }
-  }, [totalScore]);
+      if (!gameOn && rounds === 0 && total > 0) {
+        reset();
+    }
+  }, [totalScore, rounds, gameOn]);
 
   useEffect(() => {
     if (isUserName && userName !== " ") {
@@ -75,8 +64,6 @@ const UserCard = () => {
       localStorage.setItem("userName", JSON.stringify(userName));
       localStorage.setItem("usersDate", JSON.stringify(new Date()));
     }
-
-    
   }, [isUserName, userName]);
 
   const handleChange = (e) => {
@@ -98,19 +85,25 @@ const UserCard = () => {
     setName(true);
   };
 
-  const reset = () => {
+  const reset = async() => {
     GameDispatch({
       type: "SET_GAME_ON_STATES",
       payload: {
         gameOnStates: {
           ...gameOnStates,
           userName: "",
+          totalScore: 0,
+          rounds: 0,
         },
       },
     });
 
-    setName(false);
     setUserImage(randomeImage());
+    setName(false);
+
+    if (rounds === 0 && !gameOn && btnText === 'Simon') {
+      setTotal(0)
+    }
   };
 
   const randomeImage = () => {
