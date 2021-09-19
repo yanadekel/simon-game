@@ -23,6 +23,7 @@ const GameCard = () => {
     isGameloopOn,
     isUserTurnOn,
     roundScore,
+    userName
   } = gameOnStates || {
     rounds: 0,
     colorArr: ["yellow", "blue", "green", "red"],
@@ -32,6 +33,7 @@ const GameCard = () => {
     isUserTurnOn: false,
     btnText: "Simon",
     roundScore: 0,
+    userName:""
   };
   const [inGame, setInGame] = useState(gameOn);// initioal game state
   const [computerLoop, setComputerLoop] = useState(isGameloopOn); //initial computer state
@@ -164,6 +166,7 @@ const GameCard = () => {
               userArr: [],
               btnText: `Simon`,
               roundScore: 0,
+              userName:""
             },
           },
         });

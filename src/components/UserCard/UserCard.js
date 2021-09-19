@@ -3,13 +3,16 @@ import GameContext from "../../Contexts/GameContext";
 import timeout from "../../Utils/timeOutFunction";
 import Button from "../../components/Button/Button";
 import Image from "../../Utils/Image";
+import {Typography} from "@material-ui/core";
+import { Link } from "react-router-dom";
 import "./UserCard.scss";
 
 const UserCard = () => {
   const { gameOn, gameOnStates, GameDispatch } = useContext(GameContext);
-  const { userName, totalScore } = gameOnStates || {
+  const { userName, totalScore, users } = gameOnStates || {
     userName: "",
     totalScore: 0,
+    users: [],
   };
   const [isUserName, setName] = useState(false);
   const [userImg, setUserImage] = useState("");
@@ -36,8 +39,29 @@ const UserCard = () => {
   useEffect(() => {
     if (totalScore > 0) {
       setTotal(totalScore);
+      localStorage.setItem("usersDate", JSON.stringify(total));
     }
   }, [totalScore]);
+
+  useEffect(() => {
+    if (isUserName && userName !== " ") {
+      let copyNames = [...users];
+      copyNames.push(userName);
+      GameDispatch({
+        type: "SET_GAME_ON_STATES",
+        payload: {
+          gameOnStates: {
+            ...gameOnStates,
+            users: [...copyNames],
+          },
+        },
+      });
+
+      localStorage.setItem("users", JSON.parse(users.push(userName)));
+      localStorage.setItem("userName", JSON.stringify(userName));
+      localStorage.setItem("usersDate", JSON.stringify(new Date()));
+    }
+  }, [isUserName, userName]);
 
   const handleChange = (e) => {
     GameDispatch({
@@ -70,7 +94,7 @@ const UserCard = () => {
     });
 
     setName(false);
-    setUserImage(randomeImage);
+    setUserImage(randomeImage());
   };
 
   const randomeImage = () => {
@@ -81,6 +105,7 @@ const UserCard = () => {
 
   return (
     <div className="UserCard-Wrapper">
+      <div className="restBtn"></div>
       <div className="nameContainer">
         {isUserName ? (
           <div>
@@ -120,6 +145,17 @@ const UserCard = () => {
         <h3>
           Score: <span>{total}</span> points
         </h3>
+      </div>
+      <div className="home">
+        <Typography
+          component={Link}
+          to="/"
+          size="large"
+          className="custom-button"
+          style={{ color: "black", position: "absolute", top:"2px", left:"8px"}}
+        >
+          <h3> HOME </h3>
+        </Typography>
       </div>
     </div>
   );

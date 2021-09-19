@@ -4,7 +4,7 @@ import "./App.scss";
 import GameContext from "./Contexts/GameContext";
 import GameReducer from "./Reducers/GameReducer";
 import Game from "./pages/GamePage/Game";
-// import HomePage from "./pages/HomePage/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import Header from "./components/Header/Header";
 
 const App = () => {
@@ -18,10 +18,10 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          {/* <Route exact path="/">
-              <HomePage />
-            </Route> */}
           <Route exact path="/">
+              <HomePage />
+            </Route>
+          <Route path="/game">
             <GameContext.Provider value={{ ...GameState, GameDispatch }}>
               <Game />
             </GameContext.Provider>

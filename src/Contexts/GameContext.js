@@ -15,6 +15,7 @@ const GameContext = React.createContext({
         btnText:"Simon",
         roundScore:0,
         totalScore:0,
+        users:[]
     },
 
     GameDispatch: () => {}  
