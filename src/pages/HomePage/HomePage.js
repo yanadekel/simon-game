@@ -106,8 +106,8 @@ export default function HomePage() {
         <Image
           src="Img/simon-game.jpeg"
           alt="simon-game"
-          height={600}
-          width={600}
+          height={540}
+          width={690}
           style={{}}
         />
       </div>
