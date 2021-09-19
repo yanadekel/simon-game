@@ -3,7 +3,7 @@ import GameContext from "../../Contexts/GameContext";
 import timeout from "../../Utils/timeOutFunction";
 import Button from "../../components/Button/Button";
 import Image from "../../Utils/Image";
-import {Typography} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./UserCard.scss";
 
@@ -40,6 +40,20 @@ const UserCard = () => {
     if (totalScore > 0) {
       setTotal(totalScore);
       localStorage.setItem("usersDate", JSON.stringify(total));
+
+      GameDispatch({
+        type: "SET_GAME_ON_STATES",
+        payload: {
+          gameOnStates: {
+            ...gameOnStates,
+            userName: "",
+            totalScore: 0,
+          },
+        },
+      });
+      setUserImage(randomeImage());
+      setName(false);
+      setTotal(0);
     }
   }, [totalScore]);
 
@@ -61,6 +75,8 @@ const UserCard = () => {
       localStorage.setItem("userName", JSON.stringify(userName));
       localStorage.setItem("usersDate", JSON.stringify(new Date()));
     }
+
+    
   }, [isUserName, userName]);
 
   const handleChange = (e) => {
@@ -136,13 +152,13 @@ const UserCard = () => {
         <Image
           src={userImg}
           alt="randome image for user"
-          height={85}
-          width={85}
-          style={{ borderRadius: "50%", margin: "5px 0" }}
+          height={70}
+          width={70}
+          style={{ borderRadius: "50%", margin: "1px 0" }}
         />
       </div>
       <div className="userScore">
-        <h3 style={{margin:"3px"}}>
+        <h3 style={{ margin: "3px" }}>
           Score: <span>{total}</span> points
         </h3>
       </div>
@@ -152,7 +168,12 @@ const UserCard = () => {
           to="/"
           size="large"
           className="custom-button"
-          style={{ color: "black", position: "absolute", top:"10px", left:"20px"}}
+          style={{
+            color: "black",
+            position: "absolute",
+            top: "10px",
+            left: "20px",
+          }}
         >
           <h3> HOME </h3>
         </Typography>
