@@ -136,8 +136,8 @@ const UserCard = () => {
         <Image
           src={userImg}
           alt="randome image for user"
-          height={85}
-          width={85}
+          height={90}
+          width={90}
           style={{ borderRadius: "50%", margin: "8px 0" }}
         />
       </div>
