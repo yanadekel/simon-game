@@ -136,13 +136,13 @@ const UserCard = () => {
         <Image
           src={userImg}
           alt="randome image for user"
-          height={90}
-          width={90}
-          style={{ borderRadius: "50%", margin: "8px 0" }}
+          height={85}
+          width={85}
+          style={{ borderRadius: "50%", margin: "5px 0" }}
         />
       </div>
       <div className="userScore">
-        <h3 style={{marginBottom:"2px"}}>
+        <h3 style={{margin:"3px"}}>
           Score: <span>{total}</span> points
         </h3>
       </div>
