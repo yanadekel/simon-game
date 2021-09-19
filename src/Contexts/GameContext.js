@@ -7,13 +7,16 @@ const GameContext = React.createContext({
         colorArr:["yellow", "blue", "green", "red"],
         randomColorsArr:[],
         userArr:[],
+        userName:"",
+        userImage:"Img/2.jpeg",
         isGameloopOn:false, 
         isUserTurnOn:false,
         gameBtn:"gameButton" ,
         btnText:"Simon",
-        roundScore:0
+        roundScore:0,
+        totalScore:0,
     },
-    
+
     GameDispatch: () => {}  
 })
 

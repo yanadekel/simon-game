@@ -17,21 +17,16 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="appHeader">
-          <Header className="header" />
-        </div>
-        <div className="appBody">
-          <Switch>
-            {/* <Route exact path="/">
+        <Switch>
+          {/* <Route exact path="/">
               <HomePage />
             </Route> */}
-            <Route exact path="/">
-              <GameContext.Provider value={{ ...GameState, GameDispatch }}>
-                <Game />
-              </GameContext.Provider>
-            </Route>
-          </Switch>
-        </div>
+          <Route exact path="/">
+            <GameContext.Provider value={{ ...GameState, GameDispatch }}>
+              <Game />
+            </GameContext.Provider>
+          </Route>
+        </Switch>
       </BrowserRouter>
     </div>
   );

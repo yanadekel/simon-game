@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import Button from "../Button/Button";
 import Color from "../Color/Color";
-import "./ColorCard.scss";
+import "./GameCard.scss";
 import GameContext from "../../Contexts/GameContext";
 import timeout from '../../Utils/timeOutFunction';
 
 
-const ColorCard = () => {
+const GameCard = () => {
   const initialGameState = useContext(GameContext);
   const { gameOn, gameOnStates, GameDispatch } = initialGameState || {
     gameOn: false,
@@ -97,8 +97,13 @@ const ColorCard = () => {
               },
             },
           });
-        } else {
           await timeout(500);
+          setLightColor("");
+    
+        } else {
+          setUserLoop(false);          
+          await timeout(600);
+          setLightColor("");
           GameDispatch({
             type: "SET_GAME_ON_STATES",
             payload: {
@@ -106,10 +111,11 @@ const ColorCard = () => {
                 ...gameOnStates,
                 roundScore: roundScore + 10,
                 btnText: "+10 points",
+                userArr: [],
               },
             },
           });
-          await timeout(1000);
+          await timeout(1300); 
           GameDispatch({
             type: "SET_GAME_ON_STATES",
             payload: {
@@ -117,15 +123,16 @@ const ColorCard = () => {
                 ...gameOnStates,
                 rounds: rounds + 1,
                 btnText: `${rounds + 1}`,
-                userArr: [],
               },
             },
           });
-          setUserLoop(false);
           setComputerLoop(true);
         }
       } else {
+        setUserLoop(false);
+        setComputerLoop(false);
         await timeout(1000);
+        setLightColor(""); 
         GameDispatch({
           type: "SET_GAME_ON_STATES",
           payload: {
@@ -141,29 +148,29 @@ const ColorCard = () => {
           payload: {
             gameOnStates: {
               ...gameOnStates,
-              btnText: `TOTAL SCORE ${roundScore}`,
+              btnText: `TOTAL SCORE: ${roundScore}`,
+              totalScore:roundScore
             },
           },
         });
         await timeout(2000);
-        setComputerLoop(false);
-        setUserLoop(false);
-        setInGame(false);
         GameDispatch({
           type: "SET_GAME_ON_STATES",
           payload: {
             gameOnStates: {
               ...gameOnStates,
               rounds: 0,
+              randomColorsArr: [],
               userArr: [],
               btnText: `Simon`,
+              roundScore: 0,
             },
           },
         });
+        setInGame(false);
       }
 
-      await timeout(500);
-      setLightColor("");
+
     }
   };
 
@@ -171,12 +178,12 @@ const ColorCard = () => {
 
   const turnLight = async () => {
     for (let i = 0; i < randomColorsArr.length; i++) {
-      await timeout(1000);
+      await timeout(400);
       setLightColor(randomColorsArr[i]);
-      await timeout(1000);
+      await timeout(800);
       setLightColor("");
     }
-    await timeout(500);
+    // await timeout(500);
     GameDispatch({
       type: "SET_GAME_ON_STATES",
       payload: {
@@ -212,7 +219,7 @@ const ColorCard = () => {
   };
 
   return (
-    <div className="colorCard-wrapper">
+    <div className="GameCard-wrapper">
       <div className="upper-colors">
         <Color
           color={colorArr[0]}
@@ -249,7 +256,7 @@ const ColorCard = () => {
           color={colorArr[3]}
           light={lightColor === colorArr[3] ? `light-${lightColor}` : ""}
           onClick={userTurn}
-          disabled={inGame && userLoop ? false : true}
+          disabled={inGame && userLoop? false : true}
           value={colorArr[3]}
         />
       </div>
@@ -257,4 +264,4 @@ const ColorCard = () => {
   );
 };
 
-export default ColorCard;
+export default GameCard;

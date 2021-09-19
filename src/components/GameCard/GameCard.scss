@@ -1,10 +1,16 @@
-.colorCard-wrapper {
-  width: 600px;
+.GameCard-wrapper {
+  width: fit-content;
   border-radius: 50%;
-  border: rgba(0, 0, 0, 0.99)30px solid;
+  border: rgba(0, 0, 0, 0.99) 30px solid;
   overflow: hidden;
   box-shadow: 3px 3px 5px 4px rgba(0, 0, 0, 0.5);
-  position: relative;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 10px;
 
   .upper-colors {
     display: flex;

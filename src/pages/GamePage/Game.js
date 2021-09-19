@@ -1,7 +1,8 @@
 import React, { useContext, useReducer } from "react";
 import GameContext from "../../Contexts/GameContext";
 import GameReducer from "../../Reducers/GameReducer";
-import ColorCard from "../../components/ColorCard/ColorCard";
+import GameCard from "../../components/GameCard/GameCard";
+import UserCard from "../../components/UserCard/UserCard";
 import "./Game.scss";
 
 const Game = () => {
@@ -12,12 +13,15 @@ const Game = () => {
     undefined
   );
 
-
-
   return (
-    <div>
+    <div className="GameContainer">
       <GameContext.Provider value={{ ...GameState, GameDispatch }}>
-        <ColorCard />
+        <div className="UserCardContainer">
+          <UserCard />
+        </div>
+        <div className="GameCardContainer">
+          <GameCard />
+        </div>
       </GameContext.Provider>
     </div>
   );
