@@ -138,7 +138,7 @@ const UserCard = () => {
           alt="randome image for user"
           height={85}
           width={85}
-          style={{ borderRadius: "50%" }}
+          style={{ borderRadius: "50%", marginTop: "2px" }}
         />
       </div>
       <div className="userScore">
@@ -152,7 +152,7 @@ const UserCard = () => {
           to="/"
           size="large"
           className="custom-button"
-          style={{ color: "black", position: "absolute", top:"2px", left:"8px"}}
+          style={{ color: "black", position: "absolute", top:"10px", left:"20px"}}
         >
           <h3> HOME </h3>
         </Typography>

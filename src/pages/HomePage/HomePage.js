@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { FaWindowClose } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import Image from "../../Utils/Image"
+import Image from "../../Utils/Image";
 import "./HomePage.scss";
 
 export default function HomePage() {
@@ -20,7 +20,11 @@ export default function HomePage() {
         <AppBar
           position="fixed"
           className="custom-navbar"
-          style={{ zIndex: "10", backgroundColor: "rgb(220,182,119)", opacity: "0.8" }}
+          style={{
+            zIndex: "10",
+            backgroundColor: "rgb(220,182,119)",
+            opacity: "0.8",
+          }}
         >
           <Container className="app-header" style={{ maxWidth: "none" }}>
             <Toolbar
@@ -66,17 +70,17 @@ export default function HomePage() {
                             <FaWindowClose onClick={close} />
                           </IconContext.Provider>
                         </div>
-                        <div className="header"> SIMON GAME INSTRUCTIONS</div>
+                        <div className="header"> SIMON GAME </div>
                         <div className="content">
                           {" "}
                           The device has four colored buttons.
                           <br /> A round in the game consists of the device
-                          lighting up a sequence of one or more buttons,
+                          <br /> lighting up one or more buttons in a random 
+                          <br /> order, after which the player must reproduce
+                          <br /> that order by pressing the buttons.
                           <br />
-                          in a random order, after which the player must
-                          reproduce that order by pressing the buttons.
-                          <br /> As the game progresses, after the number
-                          <br /> of buttons to be pressed increases.
+                          <br /> As the game progresses, the number of buttons  
+                          <br /> to be pressed increases. A round in the game consists of the device
                         </div>
                       </div>
                     )}

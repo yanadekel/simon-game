@@ -87,10 +87,11 @@ const GameCard = () => {
       const copy4user = [...userArr];
       let shiftFirstColor = copy4user.shift();
 
+
       if (e.target.value === shiftFirstColor) {
         if (copy4user.length > 0) {
           GameDispatch({
-            type: "SET_GAME_ON_STATES",
+            type: "SET_GAME_ON_STATES",     
             payload: {
               gameOnStates: {
                 ...gameOnStates,
@@ -112,12 +113,12 @@ const GameCard = () => {
               gameOnStates: {
                 ...gameOnStates,
                 roundScore: roundScore + 10,
-                btnText: "+10 points",
+                btnText: `+ ${rounds-1}0 points`,
                 userArr: [],
               },
             },
           });
-          await timeout(1300); 
+          await timeout(1000); 
           GameDispatch({
             type: "SET_GAME_ON_STATES",
             payload: {
