@@ -23,7 +23,6 @@ const GameCard = () => {
     isGameloopOn,
     isUserTurnOn,
     roundScore,
-    userName
   } = gameOnStates || {
     rounds: 0,
     colorArr: ["yellow", "blue", "green", "red"],
@@ -32,8 +31,8 @@ const GameCard = () => {
     isGameloopOn: false,
     isUserTurnOn: false,
     btnText: "Simon",
-    roundScore: 0,
-    userName:""
+    roundScore: 10,
+    userName:"",
   };
   const [inGame, setInGame] = useState(gameOn);// initioal game state
   const [computerLoop, setComputerLoop] = useState(isGameloopOn); //initial computer state
@@ -95,8 +94,7 @@ const GameCard = () => {
             payload: {
               gameOnStates: {
                 ...gameOnStates,
-                userArr: copy4user,
-                roundScore: roundScore + 10,
+                userArr: [...copy4user],
               },
             },
           });
@@ -105,15 +103,14 @@ const GameCard = () => {
     
         } else {
           setUserLoop(false);          
-          await timeout(600);
+          await timeout(800);
           setLightColor("");
           GameDispatch({
             type: "SET_GAME_ON_STATES",
             payload: {
               gameOnStates: {
                 ...gameOnStates,
-                roundScore: roundScore + 10,
-                btnText: `+ ${rounds-1}0 points`,
+                btnText: `+${roundScore} points`,
                 userArr: [],
               },
             },
@@ -151,8 +148,8 @@ const GameCard = () => {
           payload: {
             gameOnStates: {
               ...gameOnStates,
-              btnText: `TOTAL SCORE: ${roundScore}`,
-              totalScore:roundScore
+              totalScore:(rounds-1)*roundScore,
+              btnText: `TOTAL SCORE: ${(rounds-1)*roundScore}`,
             },
           },
         });

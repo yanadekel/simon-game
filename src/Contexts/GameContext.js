@@ -13,7 +13,7 @@ const GameContext = React.createContext({
         isUserTurnOn:false,
         gameBtn:"gameButton" ,
         btnText:"Simon",
-        roundScore:0,
+        roundScore:10,
         totalScore:0,
         users:[]
     },
