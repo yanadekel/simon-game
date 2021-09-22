@@ -6,9 +6,9 @@ const Spinner = () => {
   return (
     <div
       className="spinner"
-      style={{ position: "fix", top: "50%", left: "50%" }}
+      style={{ position: "fix", top: "50%", left: "50%"}}
     >
-      <CircularProgress />
+      <CircularProgress size={100} style={{color:"black"}} />
     </div>
   );
 };

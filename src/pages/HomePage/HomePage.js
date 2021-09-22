@@ -41,11 +41,11 @@ export default function HomePage() {
                   variant="h6"
                   className="custom-title"
                   color="primary"
+                  style={{ textDecoration: "none" }}
                 >
                   <h1
                     className="app-logo"
                     style={{
-                      textDecoration: "none",
                       color: "black",
                       zIndex: "20",
                     }}
@@ -92,9 +92,9 @@ export default function HomePage() {
                 <Button
                   component={Link}
                   to="/game"
-                  size="large"
-                  className="custom-button"
-                  style={{ color: "black" }}
+                  variant="h6"
+                  className="custom-title"
+                  color="primary"
                 >
                   <h3>GAME</h3>
                 </Button>
@@ -110,7 +110,7 @@ export default function HomePage() {
             alt="simon-game"
             height={540}
             width={690}
-            style={{}}
+            style={{ boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.5)" }}
           />
         </Button>
       </div>
