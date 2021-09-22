@@ -75,12 +75,13 @@ export default function HomePage() {
                           {" "}
                           The device has four colored buttons.
                           <br /> A round in the game consists of the device
-                          <br /> lighting up one or more buttons in a random 
+                          <br /> lighting up one or more buttons in a random
                           <br /> order, after which the player must reproduce
                           <br /> that order by pressing the buttons.
                           <br />
-                          <br /> As the game progresses, the number of buttons  
-                          <br /> to be pressed increases. A round in the game consists of the device
+                          <br /> As the game progresses, the number of buttons
+                          <br /> to be pressed increases. A round in the game
+                          consists of the device
                         </div>
                       </div>
                     )}
@@ -103,13 +104,15 @@ export default function HomePage() {
         </AppBar>
       </div>
       <div className="homePimg">
-        <Image
-          src="Img/simon-game.jpeg"
-          alt="simon-game"
-          height={540}
-          width={690}
-          style={{}}
-        />
+        <Button component={Link} to="/game">
+          <Image
+            src="Img/simon-game.jpeg"
+            alt="simon-game"
+            height={540}
+            width={690}
+            style={{}}
+          />
+        </Button>
       </div>
     </div>
   );
