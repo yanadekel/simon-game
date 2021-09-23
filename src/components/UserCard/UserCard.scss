@@ -4,5 +4,13 @@
    box-shadow: 3px 3px 5px 4px rgba(0, 0, 0, 0.5);
    margin:15px 30%;
    border-radius: 20px;
+  .formWrapper{
+     .name {
+        margin: 3px;
+        .inputPlaceholder {
+           margin:3px 2px;
+        }
+     }
+  }
 
 }
