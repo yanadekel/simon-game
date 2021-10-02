@@ -9,10 +9,10 @@ const Image = ({
   className,
   title,
   style,
-  onClick,
+  onChange,
 }) => {
   return (
-    <div className={`image-wrapper ${className}`} onClick={onClick}>
+    <div className={`image-wrapper ${className}`} onChange={onChange}>
       <img
         src={src}
         title={title}

@@ -3,12 +3,15 @@ import Button from "../Button/Button";
 import Color from "../Color/Color";
 import "./GameCard.scss";
 import GameContext from "../../Contexts/GameContext";
-import timeout from '../../Utils/timeOutFunction';
-
+import timeout from "../../Utils/timeOutFunction";
 
 const GameCard = () => {
   const initialGameState = useContext(GameContext);
-  const { gameOn, gameOnStates, GameDispatch } = initialGameState || {
+  const { 
+    gameOn, 
+    gameOnStates, 
+    GameDispatch 
+  } = initialGameState || {
     gameOn: false,
     gameOnStates: {},
   };
@@ -32,12 +35,12 @@ const GameCard = () => {
     isUserTurnOn: false,
     btnText: "Simon",
     roundScore: 10,
-    userName:"",
+    userName: "",
   };
-  const [inGame, setInGame] = useState(gameOn);// initioal game state
+  const [inGame, setInGame] = useState(gameOn); // initioal game state
   const [computerLoop, setComputerLoop] = useState(isGameloopOn); //initial computer state
   const [userLoop, setUserLoop] = useState(isUserTurnOn); //initial user state
-  const [lightColor, setLightColor] = useState(``);//initial colors state
+  const [lightColor, setLightColor] = useState(``); //initial colors state
 
   //first useEffect if game turned on: inGame=true
 
@@ -48,6 +51,8 @@ const GameCard = () => {
       return gameOnStates;
     }
   }, [inGame]);
+
+  // console.log("gameOnStates", gameOnStates);
 
   //second useEffect if computerLoop is on: populate randomColorsArr with a new random color in each loop
 
@@ -69,6 +74,8 @@ const GameCard = () => {
     }
   }, [computerLoop]);
 
+  // console.log("randomColorsArr", randomColorsArr);
+
   //third useEffect if randomColorsArr.length turnLight function (turn lights and then populate userArr with lights and then userLoop on and computerLoop off)
 
   useEffect(() => {
@@ -77,7 +84,7 @@ const GameCard = () => {
     }
   }, [randomColorsArr]);
 
-  //fourth step is userLoop on, user should click on userArr colors, userArr shift first color and compers to user click, true then coputer loop false inGame=fals 
+  //fourth step is userLoop on, user should click on userArr colors, userArr shift first color and compers to user click, true then coputer loop false inGame=fals
 
   const userTurn = async (e) => {
     if (inGame && !computerLoop && userLoop) {
@@ -86,11 +93,10 @@ const GameCard = () => {
       const copy4user = [...userArr];
       let shiftFirstColor = copy4user.shift();
 
-
       if (e.target.value === shiftFirstColor) {
         if (copy4user.length > 0) {
           GameDispatch({
-            type: "SET_GAME_ON_STATES",     
+            type: "SET_GAME_ON_STATES",
             payload: {
               gameOnStates: {
                 ...gameOnStates,
@@ -100,9 +106,8 @@ const GameCard = () => {
           });
           await timeout(500);
           setLightColor("");
-    
         } else {
-          setUserLoop(false);          
+          setUserLoop(false);
           await timeout(800);
           setLightColor("");
           GameDispatch({
@@ -115,7 +120,7 @@ const GameCard = () => {
               },
             },
           });
-          await timeout(1000); 
+          await timeout(1000);
           GameDispatch({
             type: "SET_GAME_ON_STATES",
             payload: {
@@ -132,7 +137,7 @@ const GameCard = () => {
         setUserLoop(false);
         setComputerLoop(false);
         await timeout(1000);
-        setLightColor(""); 
+        setLightColor("");
         GameDispatch({
           type: "SET_GAME_ON_STATES",
           payload: {
@@ -148,8 +153,8 @@ const GameCard = () => {
           payload: {
             gameOnStates: {
               ...gameOnStates,
-              totalScore:(rounds-1)*roundScore,
-              btnText: `TOTAL SCORE: ${(rounds-1)*roundScore}`,
+              totalScore: (rounds - 1) * roundScore,
+              btnText: `TOTAL SCORE: ${(rounds - 1) * roundScore}`,
             },
           },
         });
@@ -163,15 +168,18 @@ const GameCard = () => {
               randomColorsArr: [],
               userArr: [],
               btnText: `Simon`,
-              roundScore: 0,
-              userName:""
+              userName: "",
             },
           },
         });
         setInGame(false);
+        GameDispatch({
+          type: "SET_GAME_ON",
+          payload: {
+            gameOn: true,
+          },
+        });
       }
-
-
     }
   };
 
@@ -191,7 +199,7 @@ const GameCard = () => {
         gameOnStates: {
           ...gameOnStates,
           userArr: [...randomColorsArr],
-          btnText: "Your Turn"
+          btnText: "Your Turn",
         },
       },
     });
@@ -200,11 +208,15 @@ const GameCard = () => {
     setUserLoop(true);
   };
 
-
-
-//function that turn game on: inGame true => triggers first useEffect
+  //function that turn game on: inGame true => triggers first useEffect
 
   const game = () => {
+    GameDispatch({
+      type: "SET_GAME_ON",
+      payload: {
+        gameOn: true,
+      },
+    });
     setInGame(true);
 
     GameDispatch({
@@ -257,7 +269,7 @@ const GameCard = () => {
           color={colorArr[3]}
           light={lightColor === colorArr[3] ? `light-${lightColor}` : ""}
           onClick={userTurn}
-          disabled={inGame && userLoop? false : true}
+          disabled={inGame && userLoop ? false : true}
           value={colorArr[3]}
         />
       </div>
