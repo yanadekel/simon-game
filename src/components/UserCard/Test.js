@@ -3,9 +3,11 @@ import GameContext from "../../Contexts/GameContext";
 import Image from "../../Utils/Image";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import timeout from "../../Utils/timeOutFunction";
+import { Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import User from "./User";
-import "./UserCard.scss";
 import UserForm from "./UserForm";
+import "./UserCard.scss";
 
 const Test = () => {
   const { gameOn, gameOnStates, users, GameDispatch } = useContext(GameContext);
@@ -75,15 +77,13 @@ const Test = () => {
   //     return Object.keys(errors) === 0 ? null : errors;
   //   };
 
-  const handleReset = async (e) => {
+  const handleReset = (e) => {
     e.preventDefault();
     setName(false);
-    await timeout(2000);
     // console.log("gameOn", gameOn);
     // console.log("btnText", btnText);
 
     if (btnText === "Simon" && !gameOn) {
-      await timeout(2000);
       setUser({
         userName: "",
         score: totalScore,
@@ -109,7 +109,7 @@ const Test = () => {
   return (
     <>
       {isUserName ? (
-        <User
+        <UserForm
           score={user.score}
           totalRounds={user.totalRounds}
           userName={user.userName}
@@ -124,6 +124,11 @@ const Test = () => {
               style={{ borderRadius: "50%", margin: "7px 14px 0 0 " }}
             />
           }
+          pl={1}
+          pr={1}
+          id={"userNamef"}
+          btnProp={"Reset"}
+          InputProps= {{readOnly: true}}
         />
       ) : (
         <UserForm
@@ -135,8 +140,27 @@ const Test = () => {
           ImgComponent={
             <AccountCircle sx={{ color: "action.active", mr: 1, mt: "16px" }} />
           }
+          p={1}
+          id={"userName"}
+          btnProp={"Submit"}
         />
       )}
+      <div className="home">
+        <Typography
+          component={Link}
+          to="/"
+          size="large"
+          className="custom-button"
+          style={{
+            color: "black",
+            position: "absolute",
+            top: "10px",
+            left: "20px",
+          }}
+        >
+          <h3> HOME </h3>
+        </Typography>
+      </div>
     </>
   );
 };

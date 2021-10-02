@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "../../Utils/Image";
-import { Typography, Button } from "@material-ui/core";
-import Input from "../../Utils/Input";
+import { Button } from "@material-ui/core";
 import { Box, TextField } from "@mui/material";
 import "@fontsource/roboto/500.css";
 import "./UserCard.scss";
@@ -9,7 +8,6 @@ import "./UserCard.scss";
 const User = ({
   onChange,
   onSubmit,
-  randomeImage,
   ImgComponent,
   score,
   totalRounds,
@@ -102,9 +100,9 @@ const User = ({
           variant="outlined"
           InputProps={{
             readOnly: true,
-            shrink: 'true',
-            inputMode: "numeric",
-            pattern: "[0-9]*",
+            // shrink: 'true',
+            // inputMode: "numeric",
+            // pattern: "[0-9]*",
           }}
         />
         <TextField
@@ -120,9 +118,9 @@ const User = ({
           variant="outlined"
           InputProps={{
             readOnly: true,
-            shrink: 'true',
-            inputMode: "numeric",
-            pattern: "[0-9]*",
+            // shrink: 'true',
+            // inputMode: "numeric",
+            // pattern: "[0-9]*",
           }}
         />
       </Box>

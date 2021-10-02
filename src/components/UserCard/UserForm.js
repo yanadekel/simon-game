@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import Input from "../../Utils/Input";
 import { Box, TextField } from "@mui/material";
 import "./UserCard.scss";
 
@@ -13,9 +12,13 @@ const UserForm = ({
   totalRounds,
   userName,
   disabled,
+   pl, pr, p, id,
+  InputProps,
+  btnProp
 }) => {
   console.log("name", userName);
   console.log("score", score);
+
   return (
     <Box
       component="form"
@@ -32,8 +35,10 @@ const UserForm = ({
         boxShadow: "3px 3px 5px 4px rgba(0, 0, 0, 0.5)",
         fontWeight: "bold",
         maxWidth: { xs: "97%", md: "70%", lr: "40%" },
-        p: 1,
         mt: 1.5,
+        p:{p},
+        pl:{pl},
+        pr:{pr},
       }}
     >
       <Box
@@ -50,7 +55,7 @@ const UserForm = ({
         {/* <AccountCircle sx={{ color: "action.active", mr: 1, mt: "16px" }} /> */}
         {ImgComponent}
         <TextField
-          id="userName"
+          id={id}
           label="Name"
           type="text"
           variant="standard"
@@ -58,15 +63,15 @@ const UserForm = ({
           name={`userName`}
           size="small"
           onChange={onChange}
+          InputProps={InputProps}
         />
         <Button
           variant="outlined"
           color="secondary"
           style={{ marginLeft: "16px", marginTop: "16px", padding: "3px" }}
           type="submit"
-          // onClick={onClick}
         >
-          <h6>Submit</h6>
+          <h6>{btnProp}</h6>
         </Button>
       </Box>
       <Box
