@@ -112,7 +112,7 @@ const Test = () => {
         <UserForm
           score={user.score}
           totalRounds={user.totalRounds}
-          userName={user.userName}
+          userName={user.userName.trim().toUpperCase()}
           onSubmit={handleReset}
           onChange={handleChange}
           ImgComponent={
