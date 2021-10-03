@@ -4,8 +4,8 @@ import Image from "../../Utils/Image";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import timeout from "../../Utils/timeOutFunction";
 import { Typography } from "@material-ui/core";
+import { Box, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import User from "./User";
 import UserForm from "./UserForm";
 import "./UserCard.scss";
 
@@ -47,14 +47,14 @@ const Test = () => {
         score: totalScore,
         totalRounds: rounds,
       });
-    } 
+    }
 
-    if(btnText === "Simon" && !gameOn && !isUserName){
+    if (btnText === "Simon" && !gameOn && !isUserName) {
       setUser({
         userName: "",
         score: totalScore,
         totalRounds: rounds,
-      }); 
+      });
     }
   }, [gameOn, btnText]);
 
@@ -107,7 +107,32 @@ const Test = () => {
   };
 
   return (
-    <>
+    <Box
+    component="div"
+    sx={{
+      display: "flex",
+      flexDirection: { xs: "column", md: "column" },
+      alignItems: "center",
+      bgcolor: "transperent",
+      borderRadius: "12px",
+      fontWeight: "bold",
+      width: "100%",
+      mt: 1.5,
+    }}
+  >
+      <Typography
+        component={Link}
+        to="/"
+        size="small"
+        className="custom-button"
+        style={{
+          color: "black",
+          lineHeight: 0.5,
+        }}
+      >
+        HOME
+      </Typography>
+
       {isUserName ? (
         <UserForm
           score={user.score}
@@ -128,7 +153,7 @@ const Test = () => {
           pr={1}
           id={"userNamef"}
           btnProp={"Reset"}
-          InputProps= {{readOnly: true}}
+          InputProps={{ readOnly: true }}
         />
       ) : (
         <UserForm
@@ -145,23 +170,7 @@ const Test = () => {
           btnProp={"Submit"}
         />
       )}
-      <div className="home">
-        <Typography
-          component={Link}
-          to="/"
-          size="large"
-          className="custom-button"
-          style={{
-            color: "black",
-            position: "absolute",
-            top: "10px",
-            left: "20px",
-          }}
-        >
-          <h3> HOME </h3>
-        </Typography>
-      </div>
-    </>
+    </Box>
   );
 };
 

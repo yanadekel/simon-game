@@ -52,8 +52,8 @@ const UserForm = ({
           ml: 2,
         }}
       >
-      
         {ImgComponent}
+        
         <TextField
           id={id}
           label="Name"

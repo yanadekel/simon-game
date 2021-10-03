@@ -81,7 +81,7 @@ export default function HomePage() {
                           <br />
                           <br /> As the game progresses, the number of buttons
                           <br /> to be pressed increases. A round in the game
-                          consists of the device
+                          consists of the device. Each round adds 10 points to the score.
                         </div>
                       </div>
                     )}

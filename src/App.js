@@ -7,8 +7,7 @@ import Game from "./pages/GamePage/Game";
 import HomePage from "./pages/HomePage/HomePage";
 import Loading from "./Utils/Loading";
 import timeout from "./Utils/timeOutFunction";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+
 
 const App = () => {
   const initialGameState = useContext(GameContext);
