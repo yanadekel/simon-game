@@ -1,178 +1,213 @@
 import React, { useContext, useState, useEffect } from "react";
 import GameContext from "../../Contexts/GameContext";
-import timeout from "../../Utils/timeOutFunction";
-import Button from "../../components/Button/Button";
+import UserContext from "../../Contexts/UserContext";
 import Image from "../../Utils/Image";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+// import timeout from "../../Utils/timeOutFunction";
 import { Typography } from "@material-ui/core";
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import UserForm from "./UserForm";
+import { v4 as uuidv4 } from "uuid";
 import "./UserCard.scss";
 
-const UserCard = () => {
-  const { gameOn, gameOnStates, GameDispatch } = useContext(GameContext);
-  const { userName, totalScore, users, rounds, btnText } = gameOnStates || {
+const Test = () => {
+  const { gameOn, gameOnStates } = useContext(GameContext);
+  const { rounds, totalScore, btnText, roundScore } = gameOnStates;
+  const { name, scores, users, UserDispach } = useContext(UserContext);
+  const [user, setUser] = useState({
     userName: "",
-    totalScore: 0,
-    users: [],
-  };
+    score: totalScore,
+    totalRounds: rounds,
+  });
   const [isUserName, setName] = useState(false);
-  const [userImg, setUserImage] = useState("");
-  const [total, setTotal] = useState(0);
+  const [avatar, setAvatar] = useState("Img/2.jpeg");
+  const [errors, setErrors] = useState({});
 
+  //controlls the value of rounds and score
   useEffect(() => {
-    setUserImage(randomeImage);
-    GameDispatch({
-      type: "SET_GAME_ON_STATES",
-      payload: {
-        gameOnStates: {
-          ...gameOnStates,
-          userImage: userImg,
-        },
-      },
-    });
-
-    if (!gameOn && total > 0) {
-      setUserImage(randomeImage);
-      setTotal(totalScore);
+    if (rounds > 0) {
+      setUser({
+        userName: user.userName,
+        score: (rounds - 1) * roundScore,
+        totalRounds: rounds - 1,
+      });
     }
-  }, [gameOn]);
+  }, [rounds]);
 
+  // a reset/score
   useEffect(() => {
-    if (totalScore > 0) {
-      setTotal(totalScore);
-      localStorage.setItem("usersDate", JSON.stringify(total));
-    }
-      if (!gameOn && rounds === 0 && total > 0) {
-        reset();
-    }
-  }, [totalScore, rounds, gameOn]);
-
-  useEffect(() => {
-    if (isUserName && userName !== " ") {
-      let copyNames = [...users];
-      copyNames.push(userName);
-      GameDispatch({
-        type: "SET_GAME_ON_STATES",
-        payload: {
-          gameOnStates: {
-            ...gameOnStates,
-            users: [...copyNames],
-          },
-        },
+    if (btnText === "Simon" && !gameOn && isUserName) {
+      const scoreArr = [...scores];
+      scoreArr.push(user.score);
+      UserDispach({
+        type: "ADD_SCORE",
+        payload: { scores: [...scoreArr] },
       });
 
-      localStorage.setItem("users", JSON.parse(users.push(userName)));
-      localStorage.setItem("userName", JSON.stringify(userName));
-      localStorage.setItem("usersDate", JSON.stringify(new Date()));
+      setUser({
+        userName: user.userName,
+        score: totalScore,
+        totalRounds: rounds,
+      });
     }
-  }, [isUserName, userName]);
 
-  const handleChange = (e) => {
-    GameDispatch({
-      type: "SET_GAME_ON_STATES",
-      payload: {
-        gameOnStates: {
-          ...gameOnStates,
-          userName: e.target.value,
-        },
-      },
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    alert("Name was submitted: " + userName);
-    await timeout(1000);
-    setName(true);
-  };
-
-  const reset = async() => {
-    GameDispatch({
-      type: "SET_GAME_ON_STATES",
-      payload: {
-        gameOnStates: {
-          ...gameOnStates,
-          userName: "",
-          totalScore: 0,
-          rounds: 0,
-        },
-      },
-    });
-
-    setUserImage(randomeImage());
-    setName(false);
-
-    if (rounds === 0 && !gameOn && btnText === 'Simon') {
-      setTotal(0)
+    if (btnText === "Simon" && !gameOn && !isUserName) {
+      console.log(users, "users");
+      localStorage.setItem("users", JSON.stringify(users));
+      // const localUsersData = localStorage.getItem("users");
+      // // timeout(1000)
+      // UserDispach({
+      //   type: "SET_USERS",
+      //   payload: {
+      //     users:localUsersData ? JSON.parse(localUsersData) : users,
+      //   },
+      // });
+      setUser({
+        userName: "",
+        score: totalScore,
+        totalRounds: rounds,
+      });
     }
-  };
+  }, [gameOn, btnText, isUserName, users]);
 
   const randomeImage = () => {
-    const imgArr = ["Img/1.jpeg", "Img/2.jpeg", "Img/3.jpeg"];
-    let randomImg = imgArr[Math.floor(Math.random() * 3)];
+    const imgArr = [
+      "Img/1.jpeg",
+      "Img/2.jpeg",
+      "Img/3.jpeg",
+      "Img/4.jpeg",
+      "Img/5.jpeg",
+      "Img/6.jpeg",
+    ];
+    let randomImg = imgArr[Math.floor(Math.random() * 6)];
     return randomImg;
   };
 
+  const validate = () => {
+    let temp = {};
+    temp.userName = user.userName.length > 0 ? "" : "User name is required. ";
+    temp.lettars =
+      user.userName.length > 1 && user.userName.length < 10
+        ? ""
+        : "name must be at least 2 lettars. ";
+
+    setErrors({ ...temp });
+
+    return Object.values(temp).every((x) => x == "");
+  };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    if (btnText === "Simon" && !gameOn) {
+      const temp = { user_name: name, user_scores: [...scores] };
+      UserDispach({
+        type: "SET_USERS",
+        payload: {
+          users: [...users, { ...temp, id: uuidv4 }],
+        },
+      });
+      UserDispach({
+        type: "ADD_SCORE",
+        payload: { scores: [] },
+      });
+    }
+    setName(false);
+
+    setUser({
+      userName: "",
+      score: totalScore,
+      totalRounds: rounds,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log("user submit", user);
+    if (validate()) {
+      UserDispach({
+        type: "ADD_USERNAME",
+        payload: { name: user.userName },
+      });
+      setAvatar(randomeImage());
+      setName(true);
+    }
+  };
+
+  const handleChange = (e) => {
+    const userInfo = { ...user };
+    userInfo[e.target.name] = e.target.value;
+    setUser({ ...userInfo });
+    // console.log("user change", user);
+  };
+
   return (
-    <div className="UserCard-Wrapper">
-      <div className="restBtn"></div>
-      <div className="nameContainer">
-        {isUserName ? (
-          <div>
-            <Button className="btn submitBtn" text="reset" onClick={reset} />
-            {}
-            <h3>{userName}</h3>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <label>
-              Name:
-              <input
-                type="text"
-                value={userName}
-                onChange={handleChange}
-                style={{ margin: "0 2px" }}
-              />
-            </label>
-            <Button
-              className="btn submitBtn"
-              text="Submit"
-              onClick={handleSubmit}
+    <Box
+      component="div"
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "column" },
+        alignItems: "center",
+        bgcolor: "transperent",
+        borderRadius: "12px",
+        fontWeight: "bold",
+        width: "100%",
+        mt: 1.5,
+      }}
+    >
+      <Typography
+        component={Link}
+        to="/"
+        size="small"
+        className="custom-button"
+        style={{
+          color: "black",
+          lineHeight: 0.9,
+        }}
+      >
+        HOME
+      </Typography>
+
+      {isUserName ? (
+        <UserForm
+          score={user.score}
+          totalRounds={user.totalRounds}
+          userName={user.userName.trim().toUpperCase()}
+          onSubmit={handleReset}
+          onChange={handleChange}
+          ImgComponent={
+            <Image
+              src={avatar}
+              alt="randome image for user"
+              height={50}
+              width={50}
+              style={{ borderRadius: "50%", margin: "7px 14px 0 0 " }}
             />
-          </form>
-        )}
-      </div>
-      <div className="imgContainer">
-        <Image
-          src={userImg}
-          alt="randome image for user"
-          height={70}
-          width={70}
-          style={{ borderRadius: "50%", margin: "1px 0" }}
+          }
+          pl={1}
+          pr={1}
+          id={"userNamef"}
+          btnProp={"Reset"}
+          InputProps={{ readOnly: true }}
         />
-      </div>
-      <div className="userScore">
-        <h3 style={{ margin: "3px" }}>
-          Score: <span>{total}</span> points
-        </h3>
-      </div>
-      <div className="home">
-        <Typography
-          component={Link}
-          to="/"
-          size="large"
-          className="custom-button"
-          style={{
-            color: "black",
-            position: "absolute",
-            top: "10px",
-            left: "20px",
-          }}
-        >
-          <h3> HOME </h3>
-        </Typography>
-      </div>
-    </div>
+      ) : (
+        <UserForm
+          score={user.score}
+          totalRounds={user.totalRounds}
+          userName={user.userName}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          ImgComponent={
+            <AccountCircle sx={{ color: "action.active", mr: 1, mt: "16px" }} />
+          }
+          p={1}
+          id={"userName"}
+          btnProp={"Submit"}
+          error={errors.userName || errors.lettars || errors.noChars}
+        />
+      )}
+    </Box>
   );
 };
 
-export default UserCard;
+export default Test;

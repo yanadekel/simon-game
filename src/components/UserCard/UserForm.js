@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Box, TextField } from "@mui/material";
 import "./UserCard.scss";
 
@@ -14,7 +13,8 @@ const UserForm = ({
   disabled,
    pl, pr, p, id,
   InputProps,
-  btnProp
+  btnProp,
+  error= null,
 }) => {
   console.log("name", userName);
   console.log("score", score);
@@ -55,7 +55,7 @@ const UserForm = ({
         {ImgComponent}
         
         <TextField
-          id={id}
+          id={id}Í
           label="Name"
           type="text"
           variant="standard"
@@ -64,6 +64,9 @@ const UserForm = ({
           size="small"
           onChange={onChange}
           InputProps={InputProps}
+          {...(error && {error:true, helperText: error})}
+
+          
         />
         <Button
           variant="outlined"

@@ -92,9 +92,9 @@ export default function HomePage() {
                 <Button
                   component={Link}
                   to="/game"
-                  variant="h6"
+                  variant="text"
                   className="custom-title"
-                  color="primary"
+                  color="default"
                 >
                   <h3>GAME</h3>
                 </Button>

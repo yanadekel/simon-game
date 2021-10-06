@@ -10,11 +10,6 @@ const GameReducer = (state, action) => {
         ...state,
         gameOnStates: action.payload.gameOnStates,
       };
-    case "SET_USERS":
-      return {
-        ...state,
-        users: action.payload.users,
-      };
     
     default:
       return state;
