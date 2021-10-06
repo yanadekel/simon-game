@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import GameContext from "../../Contexts/GameContext";
-import timeout from "../../Utils/timeOutFunction";
-import Button from "../Button/Button";
-import Image from "../../Utils/Image";
+import GameContext from "../../../Contexts/GameContext";
+import timeout from "../../../Utils/timeOutFunction";
+import Button from "../../Button/Button";
+import Image from "../../../Utils/Image";
 import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./UserCard.scss";
 
-const UserCard = () => {
+const UserTest = () => {
   const { gameOn, gameOnStates, GameDispatch } = useContext(GameContext);
   const { userName, totalScore, users, rounds, btnText } = gameOnStates || {
     userName: "",
@@ -175,4 +175,4 @@ const UserCard = () => {
   );
 };
 
-export default UserCard;
+export default UserTest;

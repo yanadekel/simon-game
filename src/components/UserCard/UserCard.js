@@ -3,11 +3,10 @@ import GameContext from "../../Contexts/GameContext";
 import UserContext from "../../Contexts/UserContext";
 import Image from "../../Utils/Image";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-// import timeout from "../../Utils/timeOutFunction";
+import UserForm from "./UserForm";
 import { Typography } from "@material-ui/core";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import UserForm from "./UserForm";
 import { v4 as uuidv4 } from "uuid";
 import "./UserCard.scss";
 
