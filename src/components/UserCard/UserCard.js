@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import UserForm from "./UserForm";
 import { v4 as uuidv4 } from "uuid";
 import "./UserCard.scss";
-import UserCard from './User-test';
 
 const UserCard = () => {
   const { gameOn, gameOnStates } = useContext(GameContext);
