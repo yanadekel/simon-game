@@ -55,7 +55,6 @@ const UserCard = () => {
       console.log(users, "users");
       localStorage.setItem("users", JSON.stringify(users));
       // const localUsersData = localStorage.getItem("users");
-      // // timeout(1000)
       // UserDispach({
       //   type: "SET_USERS",
       //   payload: {

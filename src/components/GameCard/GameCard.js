@@ -176,7 +176,7 @@ const GameCard = () => {
         GameDispatch({
           type: "SET_GAME_ON",
           payload: {
-            gameOn: true,
+            gameOn: false,
           },
         });
       }
