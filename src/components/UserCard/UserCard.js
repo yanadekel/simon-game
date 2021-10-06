@@ -10,8 +10,9 @@ import { Link } from "react-router-dom";
 import UserForm from "./UserForm";
 import { v4 as uuidv4 } from "uuid";
 import "./UserCard.scss";
+import UserCard from './User-test';
 
-const Test = () => {
+const UserCard = () => {
   const { gameOn, gameOnStates } = useContext(GameContext);
   const { rounds, totalScore, btnText, roundScore } = gameOnStates;
   const { name, scores, users, UserDispach } = useContext(UserContext);
@@ -210,4 +211,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default UserCard;

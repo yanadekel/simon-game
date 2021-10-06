@@ -10,7 +10,7 @@ const GameReducer = (state, action) => {
         ...state,
         gameOnStates: action.payload.gameOnStates,
       };
-    
+
     default:
       return state;
   }
